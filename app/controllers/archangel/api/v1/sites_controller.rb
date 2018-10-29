@@ -7,10 +7,20 @@ module Archangel
         before_action :set_resource, only: %i[show]
 
         def show
-          render_json @site
+          options = {
+            is_collection: false,
+            links: {},
+            meta: {}
+          }
+
+          render_json serializer.new(@site, options).serialized_json
         end
 
         protected
+
+        def serializer
+          Archangel::Api::V1::SiteSerializer
+        end
 
         def set_resource
           @site = current_site

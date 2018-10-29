@@ -3,10 +3,11 @@
 module Archangel
   module Api
     module V1
-      class CollectionSerializer < ActiveModel::Serializer
-        type "collection"
+      class CollectionSerializer < V1Serializer
+        set_type "collection"
 
         has_many :entries
+        has_many :fields
 
         attributes :name, :slug
       end

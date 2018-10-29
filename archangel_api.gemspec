@@ -22,4 +22,7 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency "archangel", "< 1.0"
+
+  s.add_dependency "brita", "~> 0.10"
+  s.add_dependency "fast_jsonapi", "~> 1.4"
 end

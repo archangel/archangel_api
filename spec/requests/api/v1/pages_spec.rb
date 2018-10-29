@@ -158,7 +158,7 @@ RSpec.describe "Pages API", type: :request do
       it "returns content" do
         page = create(:page, site: site)
 
-        post "/api/v1/pages/#{page.path}", headers: headers
+        post "/api/v1/pages/#{page.id}", headers: headers
 
         parsed_body = JSON.parse(response.body)
 
@@ -172,7 +172,7 @@ RSpec.describe "Pages API", type: :request do
       it "returns content" do
         page = create(:page, site: site)
 
-        post "/api/v1/pages/#{page.path}", headers: headers
+        post "/api/v1/pages/#{page.id}", headers: headers
 
         parsed_body = JSON.parse(response.body)
 
@@ -188,7 +188,7 @@ RSpec.describe "Pages API", type: :request do
       it "returns content" do
         page = create(:page, site: site)
 
-        put "/api/v1/pages/#{page.path}", headers: headers
+        put "/api/v1/pages/#{page.id}", headers: headers
 
         parsed_body = JSON.parse(response.body)
 
@@ -202,7 +202,7 @@ RSpec.describe "Pages API", type: :request do
       it "returns content" do
         page = create(:page, site: site)
 
-        put "/api/v1/pages/#{page.path}", headers: headers
+        put "/api/v1/pages/#{page.id}", headers: headers
 
         parsed_body = JSON.parse(response.body)
 
@@ -217,7 +217,7 @@ RSpec.describe "Pages API", type: :request do
     it "responds with 204 status code" do
       page = create(:page, site: site)
 
-      get "/api/v1/pages/#{page.path}", headers: headers
+      delete "/api/v1/pages/#{page.id}", headers: headers
 
       expect(response).to have_http_status(:no_content)
       expect(response.content_type).to eq("application/vnd.api+json")

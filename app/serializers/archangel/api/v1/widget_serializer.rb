@@ -3,10 +3,10 @@
 module Archangel
   module Api
     module V1
-      class WidgetSerializer < ActiveModel::Serializer
-        type "widget"
+      class WidgetSerializer < V1Serializer
+        set_type "widget"
 
-        attributes :name, :slug, :content
+        attributes :slug, :name, :content
       end
     end
   end

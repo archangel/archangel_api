@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require "archangel"
-require "active_model_serializers"
 require "brita"
+require "fast_jsonapi"
 
 require "archangel_api/engine"
 require "archangel_api/version"

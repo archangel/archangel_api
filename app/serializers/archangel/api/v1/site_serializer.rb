@@ -3,13 +3,12 @@
 module Archangel
   module Api
     module V1
-      class SiteSerializer < ActiveModel::Serializer
-        type "site"
+      class SiteSerializer < V1Serializer
+        set_type "site"
 
-        attributes :name, :theme, :locale, :logo, :meta_keywords,
-                   :meta_description
+        attributes :name, :theme, :locale, :meta_keywords, :meta_description
 
-        def logo
+        attribute :logo do |object|
           {
             original: object.logo.url,
             tiny: object.logo.tiny.url,

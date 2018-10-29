@@ -12,13 +12,14 @@ Archangel::Engine.routes.draw do
 
       resources :pages, only: %i[index show]
       resources :widgets, only: %i[index show]
+
+      root to: "roots#home", via: :get
     end
 
-    match "*path", to: "api/v1/errors#not_found",
-                   defaults: { format: :json },
-                   via: :get,
+    match "*path", to: "v1/errors#resource_not_found",
+                   via: %i[delete get head post put],
                    as: :api_v1_error
 
-    root to: "api/v1/homes#show", via: :get
+    root to: "v1/roots#home", via: :get
   end
 end

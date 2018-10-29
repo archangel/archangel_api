@@ -9,28 +9,30 @@ module Archangel
     protected
 
     def render_not_found
+      error_translation_scope = %i[api errors not_found]
       error = {
         status: 404,
-        title: "Not Found",
-        detail: "Not found"
+        title: Archangel.t(:title, scope: error_translation_scope),
+        detail: Archangel.t(:detail, scope: error_translation_scope)
       }
 
-      render_error(error, status: :not_found)
+      render_error([error], status: :not_found)
     end
 
     def render_unprocessable_entity
+      error_translation_scope = %i[api errors unprocessable_entity]
       error = {
         status: 422,
-        title: "Unprocessable Entity",
-        detail: "Unprocessable entity"
+        title: Archangel.t(:title, scope: error_translation_scope),
+        detail: Archangel.t(:detail, scope: error_translation_scope)
       }
 
-      render_error(error, status: :unprocessable_entity)
+      render_error([error], status: :unprocessable_entity)
     end
 
-    def render_error(error, options = {})
+    def render_error(errors, options = {})
       errors = {
-        errors: [error]
+        errors: errors
       }
 
       render_json(errors, options)

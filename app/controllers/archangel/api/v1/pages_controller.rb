@@ -18,16 +18,23 @@ module Archangel
         before_action :set_new_resource, only: %i[create]
 
         def index
-          # render json: @pages, meta: @pages, links: @pages
-          render_json @pages
+          options = {
+            is_collection: true,
+            links: resource_listing_links,
+            meta: resource_listing_meta
+          }
+
+          render_json serializer.new(@pages, options).serialized_json
         end
 
         def show
-          # render json: @page, links: @pages
-
           render_not_found && return if @page.blank?
 
-          render_json @page
+          options = {
+            is_collection: false
+          }
+
+          render_json serializer.new(@page, options).serialized_json
         end
 
         def create
@@ -53,6 +60,10 @@ module Archangel
         end
 
         protected
+
+        def serializer
+          Archangel::Api::V1::PageSerializer
+        end
 
         def permitted_attributes
           %w[content homepage meta_description meta_keywords parent_id path
@@ -81,6 +92,29 @@ module Archangel
 
         def resource_namespace
           controller_name.singularize.to_sym
+        end
+
+        def resource_listing_meta
+          {
+            current_count: 12,
+            total_count: 500,
+            current_page: 1,
+            first_page: 1,
+            previous_page: nil,
+            next_page: 2,
+            last_page: 40
+          }
+        end
+
+        def resource_listing_links
+          {
+            self: "self url",
+            first_page: "first page url",
+            previous_page: "prev page url",
+            next_page: "next page url",
+            last_page: "last page url",
+            home_page: "homepage url"
+          }
         end
       end
     end

@@ -3,15 +3,19 @@
 module Archangel
   module Api
     module V1
-      class PageSerializer < ActiveModel::Serializer
-        type "page"
+      class PageSerializer < V1Serializer
+        set_type "page"
 
-        attributes :title, :path, :content, :homepage, :meta_keywords,
-                   :meta_description
-
-        def path
+        attribute :path do |object|
           object.homepage? ? "/" : "/#{object.path}"
         end
+
+        attribute :url do |object|
+          "http://localhost:3000" + (object.homepage? ? "" : "/#{object.path}")
+        end
+
+        attributes :title, :content, :homepage, :meta_keywords,
+                   :meta_description
       end
     end
   end

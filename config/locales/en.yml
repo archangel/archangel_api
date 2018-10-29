@@ -1,4 +1,13 @@
 en:
   archangel:
-    hello: "Hello world"
-    archangel_api: ArchangelApi
+    api:
+      errors:
+        not_found:
+          detail: Not found
+          title: Not Found
+        resource_not_found:
+          detail: Resource not found
+          title: Resource Not Found
+        unprocessable_entity:
+          detail: Unprocessable entity
+          title: Unprocessable Entity
